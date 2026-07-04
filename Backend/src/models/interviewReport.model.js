@@ -72,6 +72,19 @@ const interviewReportSchema = new mongoose.Schema({
     resume: {
         type: String,
     },
+    originalResumeFile: {
+        type: Buffer,
+    },
+    originalResumeFileType: {
+        type: String,
+    },
+    originalResumeFontFamily: {
+        type: String,
+        default: "Arial, Helvetica, sans-serif"
+    },
+    extractedUrls: [ {
+        type: String
+    } ],
     selfDescription: {
         type: String,
     },
@@ -80,8 +93,37 @@ const interviewReportSchema = new mongoose.Schema({
         min: 0,
         max: 100,
     },
+    matchScoreOriginal: {
+        type: Number,
+        min: 0,
+        max: 100,
+    },
+    matchScoreRefined: {
+        type: Number,
+        min: 0,
+        max: 100,
+    },
+    refinedResumeHtml: {
+        type: String,
+    },
+    refinedResumeData: {
+        type: Object,
+    },
+    selectedTemplate: {
+        type: String,
+        default: "early",
+    },
     technicalQuestions: [ technicalQuestionSchema ],
-    behavioralQuestions: [ behavioralQuestionSchema ],
+    behavioralQuestions: [ mongoose.Schema.Types.Mixed ],
+    projectQuestions: [ mongoose.Schema.Types.Mixed ],
+    workExperienceQuestions: [ mongoose.Schema.Types.Mixed ],
+    metadata: {
+        type: Object,
+    },
+    preparationDays: {
+        type: Number,
+        default: 7
+    },
     skillGaps: [ skillGapSchema ],
     preparationPlan: [ preparationPlanSchema ],
     user: {

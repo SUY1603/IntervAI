@@ -411,73 +411,291 @@ $font-stack:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot
     }
 }
 
-// ── Recent Reports ───────────────────────────────────────────────────────────
-.recent-reports {
-    width: 100%;
-    max-width: 900px;
-    margin-top: 2.5rem;
+// ── Layout Wrappers ──────────────────────────────────────────────────────────
+.home-layout-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: $bg-page;
+}
+
+// ── Left Sidebar (Gemini Style) ────────────────────────────────────────────────
+.home-sidebar {
+    width: 260px;
+    height: 100%;
+    background-color: $bg-card;
+    border-right: 1px solid $border-color;
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    flex-shrink: 0;
+    transition: width 0.22s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.18s ease, visibility 0.18s ease;
+    z-index: 20;
 
-    h2 {
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: #fff;
-        margin: 0;
+    &--collapsed {
+        width: 0px;
+        opacity: 0;
+        visibility: hidden;
+        border-right-width: 0px;
+        pointer-events: none;
     }
 
-    .reports-list {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 1rem;
-        list-style: none;
-        padding: 0;
-        margin: 0;
+    .sidebar-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.25rem 1rem 0.75rem 1rem;
+        height: 60px;
+        box-sizing: border-box;
 
-        .report-item {
-            background-color: #1a1f27;
-            border: 1px solid #2d333b;
-            border-radius: 0.4rem;
-            padding: 1.25rem;
+        .sidebar-branding {
             display: flex;
-            flex-direction: column;
+            align-items: center;
             gap: 0.5rem;
+            color: $text-primary;
+
+            .brand-icon {
+                color: $accent;
+                display: flex;
+                align-items: center;
+            }
+
+            .brand-name {
+                font-weight: 700;
+                font-size: 1.05rem;
+                letter-spacing: -0.01em;
+            }
+        }
+
+        .sidebar-toggle-btn {
+            background: none;
+            border: none;
+            color: $text-muted;
             cursor: pointer;
-            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 0.3rem;
+            transition: all 0.2s;
 
             &:hover {
-                transform: translateY(-4px);
-                border-color: #444c56;
-                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+                background-color: $bg-panel;
+                color: $text-primary;
+            }
+        }
+    }
+
+    .sidebar-content {
+        flex: 1;
+        overflow-y: auto;
+        padding: 0.75rem 0.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        &::-webkit-scrollbar {
+            width: 4px;
+            display: block;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 2px;
+        }
+
+        .sidebar-section-title {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: $text-muted;
+            padding: 0 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .sidebar-empty-state {
+            font-size: 0.75rem;
+            color: $text-muted;
+            font-style: italic;
+            padding: 0.5rem;
+        }
+
+        .sidebar-reports-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .sidebar-report-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.55rem 0.6rem;
+            border-radius: 0.3rem;
+            cursor: pointer;
+            transition: all 0.15s;
+            color: color.adjust($text-muted, $lightness: 10%);
+
+            &:hover {
+                background-color: $bg-panel;
+                color: $text-primary;
             }
 
-            h3 {
-                font-size: 0.95rem;
+            .item-icon {
+                display: flex;
+                align-items: center;
+                color: $accent;
+                opacity: 0.75;
+                flex-shrink: 0;
+            }
+
+            .item-meta {
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+                flex: 1;
+
+                .item-title {
+                    font-size: 0.825rem;
+                    font-weight: 500;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    color: inherit;
+                }
+
+                .item-date {
+                    font-size: 0.65rem;
+                    color: $text-muted;
+                    margin-top: 0.1rem;
+                }
+            }
+        }
+    }
+
+    .sidebar-profile-card {
+        padding: 0.85rem;
+        border-top: 1px solid $border-color;
+        background-color: rgba(0, 0, 0, 0.15);
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+
+        .profile-avatar-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, $accent 0%, color.adjust($accent, $lightness: -15%) 100%);
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba($accent, 0.25);
+            flex-shrink: 0;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            flex: 1;
+
+            .profile-username {
+                font-size: 0.825rem;
                 font-weight: 600;
-                color: #e6edf3;
-                margin: 0;
-                line-height: 1.4;
+                color: $text-primary;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
             }
 
-            .report-meta {
-                font-size: 0.75rem;
-                color: #7d8590;
-                margin: 0;
-            }
-
-            .match-score {
-                font-size: 0.8rem;
-                font-weight: 700;
-                margin-top: 0.5rem;
-
-                &.score--high { color: #238636; } // Green
-                &.score--mid  { color: #d29922; } // Amber/Yellow
-                &.score--low  { color: #da3633; } // Red
+            .profile-tier {
+                font-size: 0.65rem;
+                color: $accent;
+                font-weight: 500;
             }
         }
     }
 }
+
+// ── Main Workspace ──────────────────────────────────────────────────────────
+.home-main-content {
+    flex: 1;
+    height: 100%;
+    overflow-y: auto;
+    background-color: $bg-page;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    .top-nav {
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-width: unset;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.85rem 1.5rem;
+        height: 60px;
+        box-sizing: border-box;
+        border-bottom: 1px solid rgba($border-color, 0.12);
+        background-color: rgba($bg-page, 0.8);
+        backdrop-filter: blur(12px);
+        z-index: 10;
+        transform: none;
+        pointer-events: auto;
+
+        .sidebar-open-btn {
+            background: none;
+            border: none;
+            color: $text-muted;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 0.3rem;
+            transition: all 0.2s;
+
+            &:hover {
+                background-color: $bg-panel;
+                color: $text-primary;
+            }
+        }
+
+        .logout-btn {
+            position: relative;
+            top: unset;
+            left: unset;
+            transform: none;
+        }
+    }
+
+    .home-page-inner {
+        width: 100%;
+        max-width: 900px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem 1.5rem 6rem 1.5rem;
+        gap: 2rem;
+        box-sizing: border-box;
+        flex-shrink: 0;
+    }
+}
+
 
 
 // ── Page Footer ───────────────────────────────────────────────────────────────
@@ -494,5 +712,38 @@ $font-stack:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot
         &:hover {
             color: $text-primary;
         }
+    }
+}
+
+// ── Template Zoom Modal ──────────────────────────────────────────────────────
+.template-zoom-overlay {
+    outline: none; // Remove focus ring on the overlay div
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 3px;
+    }
+}
+
+@keyframes fadeInModal {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleInModal {
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
     }
 }
