@@ -52,7 +52,7 @@ IntervAI uses a modern client-server architecture split between a React SPA clie
                            ▼ POST /api/interview/ (Multipart Form-Data)
 ┌────────────────────────────────────────────────────────┐
 │                  ROUTER & MIDDLEWARES                  │
-│   Verifies user session (authUser) and processes      │
+│   Verifies user session (authUser) and processes       │
 │   binary PDF file uploads (Multer).                    │
 └──────────────────────────┬─────────────────────────────┘
                            │
