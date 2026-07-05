@@ -9,12 +9,12 @@ Inspired by premium productivity tools, the dashboard features a collapsible sid
 
 ## Key Features
 
-### 1. Collapsible Dashboard Navigation
-* **Collapsible Sidebar**: Easily toggle the sidebar to view past interview preparation plans, manage candidate profiles, or collapse it completely to maximize workspace layout.
-
-### 2. User Authentication & Guarded Sessions
+### 1. User Authentication & Guarded Sessions
 * **Secure Candidate Accounts**: Custom registration and sign-in flow matching the application's dark slate styling guidelines.
 * **Protected Routing**: Route guard verification checks prevent unauthenticated users from accessing strategy sheets and practice dashboards.
+
+### 2. Collapsible Dashboard Navigation
+* **Collapsible Sidebar**: Easily toggle the sidebar to view past interview preparation plans, manage candidate profiles, or collapse it completely to maximize workspace layout.
 
 ### 3. Tailored Prep Strategy Roadmaps
 * **ATS Score Estimations**: Estimates resume compliance scores against target Job Descriptions (JD) and highlights critical missing keywords.
