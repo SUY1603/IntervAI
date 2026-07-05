@@ -44,21 +44,21 @@ IntervAI uses a modern client-server architecture split between a React SPA clie
 
 ```
 ┌────────────────────────────────────────────────────────┐
-│                   CLIENT (React SPA)                    │
+│                   CLIENT (React SPA)                   │
 │   Renders layouts, handles voice dictation, lazy-loads │
 │   PDF.js onto Canvas, and captures user forms.         │
 └──────────────────────────┬─────────────────────────────┘
                            │
                            ▼ POST /api/interview/ (Multipart Form-Data)
 ┌────────────────────────────────────────────────────────┐
-│                   ROUTER & MIDDLEWARES                 │
+│                  ROUTER & MIDDLEWARES                  │
 │   Verifies user session (authUser) and processes      │
 │   binary PDF file uploads (Multer).                    │
 └──────────────────────────┬─────────────────────────────┘
                            │
                            ▼
 ┌────────────────────────────────────────────────────────┐
-│             CONTROLLER (interview.controller.js)       │
+│          CONTROLLER (interview.controller.js)          │
 │   Parses text (pdf-parse), detects fonts/links, and    │
 │   triggers concurrent LLM engines in parallel.         │
 └──────────────────────────┬─────────────────────────────┘
@@ -67,7 +67,7 @@ IntervAI uses a modern client-server architecture split between a React SPA clie
              ▼                           ▼
 ┌─────────────────────────┐ ┌────────────────────────────┐
 │   DATABASE (MongoDB)    │ │   EXTERNAL ENGINES         │
-│   Mongoose model stores  │ │   - OpenAI (Tailor Resume) │
+│  Mongoose model stores  │ │   - OpenAI (Tailor Resume) │
 │   stateless prep logs   │ │   - Gemini (Interview Prep)│
 └─────────────────────────┘ └────────────────────────────┘
 ```
