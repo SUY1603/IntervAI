@@ -11,7 +11,6 @@ Inspired by premium productivity tools, the dashboard features a collapsible sid
 
 ### 1. Collapsible Dashboard Navigation
 * **Collapsible Sidebar**: Easily toggle the sidebar to view past interview preparation plans, manage candidate profiles, or collapse it completely to maximize workspace layout.
-* **Branding & Profile Tracking**: Displays a clean initials avatar badge with the active candidate's username, matching Gemini's modern profile design.
 
 ### 2. User Authentication & Guarded Sessions
 * **Secure Candidate Accounts**: Custom registration and sign-in flow matching the application's dark slate styling guidelines.
