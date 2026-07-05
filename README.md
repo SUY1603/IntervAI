@@ -10,20 +10,41 @@ Inspired by premium productivity tools, the dashboard features a collapsible sid
 ## Key Features
 
 ### 1. Collapsible Dashboard Navigation
-* **Gemini-Inspired Layout**: Features a collapsible left sidebar to switch between past reports, manage profiles, and start new mock preparation workflows.
-* **Focused Practicing**: The sidebar slides out of view during mock interviews, freeing up screen real estate for immersive training sessions.
+* **Collapsible Sidebar**: Easily toggle the sidebar to view past interview preparation plans, manage candidate profiles, or collapse it completely to maximize workspace layout.
+* **Branding & Profile Tracking**: Displays a clean initials avatar badge with the active candidate's username, matching Gemini's modern profile design.
 
-### 2. Tailored Prep Strategy Roadmaps
+### 2. User Authentication & Guarded Sessions
+* **Secure Candidate Accounts**: Custom registration and sign-in flow matching the application's dark slate styling guidelines.
+* **Protected Routing**: Route guard verification checks prevent unauthenticated users from accessing strategy sheets and practice dashboards.
+
+### 3. Tailored Prep Strategy Roadmaps
 * **ATS Score Estimations**: Estimates resume compliance scores against target Job Descriptions (JD) and highlights critical missing keywords.
 * **Custom Step-by-Step Plans**: Recommends personalized study schedules (from 1 to 60 days) to bridge technical knowledge gaps before the interview.
-* **Resume Template Selection**: Interactive preview card comparing "Early Career" and "Experienced Track" layout templates, with interactive fullscreen zooming options.
+* **Template Live Preview**: Switch between "Early Career" and "Experienced Track" layout templates, with interactive fullscreen zooming options.
 
-### 3. Voice-Interactive Mock Interview Simulator
+### 4. Tailored ATS Resume Generator & Downloader
+* **Dynamic PDF Compiling**: Compiles a tailored resume using the selected template style, structured based on candidate profile and target job description attributes.
+* **Interactive PDF Renderer**: Displays the compiled document in real-time using a custom PDF.js canvas viewer, avoiding standard browser iframe rendering bottlenecks.
+* **Local Downloading**: Allows candidates to download their compiled ATS-compliant PDF resume directly to their systems.
+
+### 5. Voice-Interactive Mock Interview Simulator
 * **Interactive AI Interviewer**: Simulates custom technical screening sessions with direct question-by-question audio readouts using browser-native **Text-to-Speech (TTS)**.
 * **Seamless Speech-to-Text (STT)**: Allows candidates to dictate answers directly via the web speech engine, complete with connection/permission status badges.
 * **Privacy Workaround Support**: Gracefully fallback to standard typing inputs on Brave/Firefox with automated info tips guiding users to activate Windows (`Win + H`) or macOS system-level voice dictation tools.
-* **Cheaper Turn Caps**: Configurable interview lengths (**Quick Session** of 5 questions or **Deep-Dive** of 10 questions) to manage LLM resource consumption.
+* **Cheaper Turn Caps**: Configurable interview lengths (Quick Session of 5 questions or Deep-Dive of 10 questions) to manage LLM resource consumption.
 * **Detailed Grading Reports**: Delivers immediate post-interview analysis summarizing performance scores, strengths, improvement metrics, and detailed question critiques.
+
+---
+
+## Visual Previews
+
+### Dashboard & Sidebar View
+![Dashboard View](assets/dashboard_preview.png)
+
+### Mock Interview Practice Terminal
+![Mock Interview Terminal](assets/interview_preview.png)
+
+*To render actual images on GitHub, simply drop your screenshots in an `assets/` folder in the root directory under the names `dashboard_preview.png` and `interview_preview.png`.*
 
 ---
 
@@ -32,7 +53,7 @@ Inspired by premium productivity tools, the dashboard features a collapsible sid
 ### Frontend (Client-side)
 * **Core Framework**: React 18+ (Vite SPA)
 * **Routing & UI**: React Router v6, CSS/SCSS (Vanilla styling tokens)
-* **Browser Integration**: Web Speech API (`window.speechSynthesis`, `window.webkitSpeechRecognition`)
+* **Browser Integration**: Web Speech API (`window.speechSynthesis`, `window.webkitSpeechRecognition`), PDF.js canvas rendering
 
 ### Backend (Server-side)
 * **Server Framework**: Node.js & Express
