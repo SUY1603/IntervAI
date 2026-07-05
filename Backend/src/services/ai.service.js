@@ -707,13 +707,14 @@ function renderResumeToHtml(data, template, fontFamily = "Arial, Helvetica, sans
 }
 
 async function optimizeResumeHtmlForOnePage(data, template, fontFamily) {
-    const browser = await puppeteer.launch({
-        args: ["--no-sandbox", "--disable-setuid-sandbox"]
-    });
-    const page = await browser.newPage();
-    let zoom = 1.0;
-    let html = "";
+    let browser;
+    let html = renderResumeToHtml(data, template, fontFamily, 1.0);
     try {
+        browser = await puppeteer.launch({
+            args: ["--no-sandbox", "--disable-setuid-sandbox"]
+        });
+        const page = await browser.newPage();
+        let zoom = 1.0;
         while (zoom >= 0.7) {
             html = renderResumeToHtml(data, template, fontFamily, zoom);
             await page.setContent(html, { waitUntil: "networkidle0" });
@@ -731,7 +732,9 @@ async function optimizeResumeHtmlForOnePage(data, template, fontFamily) {
     } catch (err) {
         console.error("Error optimizing resume HTML:", err);
     } finally {
-        await browser.close();
+        if (browser) {
+            await browser.close();
+        }
     }
     return html;
 }
