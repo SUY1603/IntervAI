@@ -1,4 +1,4 @@
-# IntervAI 🚀
+# IntervAI
 > **AI-Powered Technical Interview Strategy & Practice Simulator Dashboard**
 
 IntervAI is a modern, full-stack application designed to help candidates prepare for their target job roles by analyzing job descriptions against their resumes, building custom prep strategy roadmaps, and providing a real-time, voice-interactive technical mock interview experience. 
@@ -7,7 +7,7 @@ Inspired by premium productivity tools, the dashboard features a collapsible sid
 
 ---
 
-## ✨ Key Features
+## Key Features
 
 ### 1. Collapsible Dashboard Navigation
 * **Gemini-Inspired Layout**: Features a collapsible left sidebar to switch between past reports, manage profiles, and start new mock preparation workflows.
@@ -27,7 +27,7 @@ Inspired by premium productivity tools, the dashboard features a collapsible sid
 
 ---
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 ### Frontend (Client-side)
 * **Core Framework**: React 18+ (Vite SPA)
@@ -41,14 +41,14 @@ Inspired by premium productivity tools, the dashboard features a collapsible sid
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
-### 📋 Prerequisites
+### Prerequisites
 * **Node.js** (v18 or higher)
 * **MongoDB** (Local instance or Atlas connection string)
 * **AI API Key** (Gemini or OpenAI API access token)
 
-### 💻 Installation
+### Installation
 
 1. **Clone the Repository**:
    ```bash
@@ -85,5 +85,5 @@ Inspired by premium productivity tools, the dashboard features a collapsible sid
 
 ---
 
-## 🛡️ License
+## License
 Distributed under the MIT License. See `LICENSE` for more information.
